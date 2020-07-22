@@ -1,0 +1,18 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x < 0:
+            x = abs(x)
+            x = str(x)[::-1]
+            x.replace('0','')
+            x = -int(x)
+
+        else:
+            x=str(x)[::-1]
+            x.replace('0','')
+            x=int(x)
+            
+        if -(2**31) < x < (2**31)-1:
+            x = x
+        else:
+            x = 0
+        return x
