@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        const int N = s.size();
+        if (N <= 1) return N;
+        unordered_set<char> set;
+        int res = 0;
+        int l = 0, r = 0;
+        while (r < N) {
+            while (set.count(s[r])) {
+                set.erase(s[l]);
+                ++l;
+            }
+            set.insert(s[r]);
+            res = max(res, int(set.size()));
+            ++r;
+        }
+        return res;
+    }
+};
