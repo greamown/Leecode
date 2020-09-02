@@ -1,0 +1,31 @@
+    public class Solution
+    {
+        public int LengthOfLongestSubstring(string s)
+        {
+            var charArray = s.ToCharArray();
+
+            var longestWord = new Dictionary<char, int>();
+            var index = 0;
+            var lastLongestWordLength = 0;
+
+            while (index < charArray.Length)
+            {
+                var c = charArray[index];
+
+                if (longestWord.ContainsKey(c))
+                {
+                    lastLongestWordLength = Math.Max(lastLongestWordLength, longestWord.Count);
+                    index = longestWord[c];
+                    longestWord.Clear();
+                }
+                else
+                {
+                    longestWord.Add(c, index);
+                }
+
+                index++;
+            }
+
+            return Math.Max(lastLongestWordLength, longestWord.Count);
+        }
+    }
