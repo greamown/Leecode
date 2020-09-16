@@ -1,8 +1,0 @@
-from collections import Counter
-class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
-        resultx = Counter(nums)
-        for xx in resultx:
-            if resultx[xx]<2:
-                x = xx
-        return x
