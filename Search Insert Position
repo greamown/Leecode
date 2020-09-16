@@ -29,3 +29,24 @@ public:
 
 
 #--------------C#
+public class Solution {
+    public int SearchInsert(int[] nums, int target) {
+    var fri = 0;
+    var las = nums.Length-1;
+    while(fri <= las){
+        var mid = (fri-las)/2+las;
+        
+        if(nums[mid] == target){
+            return mid;
+        }
+        else if(nums[mid] < target){
+            las = mid+1;
+        }
+        else{
+            fri = mid-1;
+        }
+    }
+        return las;
+    }
+    
+}
