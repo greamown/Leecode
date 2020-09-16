@@ -1,3 +1,4 @@
+#--------------python
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
@@ -17,3 +18,60 @@ class Solution(object):
                 right += 1
                 res = max(res, len(chars))
         return res
+
+
+#--------------C++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        const int N = s.size();
+        if (N <= 1) return N;
+        unordered_set<char> set;
+        int res = 0;
+        int l = 0, r = 0;
+        while (r < N) {
+            while (set.count(s[r])) {
+                set.erase(s[l]);
+                ++l;
+            }
+            set.insert(s[r]);
+            res = max(res, int(set.size()));
+            ++r;
+        }
+        return res;
+    }
+};
+
+
+#--------------C#
+ public class Solution
+    {
+        public int LengthOfLongestSubstring(string s)
+        {
+            var charArray = s.ToCharArray();
+
+            var longestWord = new Dictionary<char, int>();
+            var index = 0;
+            var lastLongestWordLength = 0;
+
+            while (index < charArray.Length)
+            {
+                var c = charArray[index];
+
+                if (longestWord.ContainsKey(c))
+                {
+                    lastLongestWordLength = Math.Max(lastLongestWordLength, longestWord.Count);
+                    index = longestWord[c];
+                    longestWord.Clear();
+                }
+                else
+                {
+                    longestWord.Add(c, index);
+                }
+
+                index++;
+            }
+
+            return Math.Max(lastLongestWordLength, longestWord.Count);
+        }
+    }
