@@ -1,0 +1,21 @@
+#--------------python  
+from collections import Counter
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        resultx = Counter(nums)
+        for xx in resultx:
+            if resultx[xx]<2:
+                x = xx
+        return x
+
+#--------------C#
+public class Solution {
+    public int SingleNumber(int[] nums) {
+        int ans = nums[0];
+        for (int i = 1; i < nums.Length; i++)
+        {
+            ans ^= nums[i];
+        }
+        return ans;
+    }
+}
