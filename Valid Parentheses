@@ -1,0 +1,84 @@
+#--------------python3
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        mapping = {")": "(", "}": "{", "]": "["}
+        for char in s:
+            if char in mapping:
+                top_element = stack.pop() if stack else '#'
+                if mapping[char] != top_element:
+                    return False
+            else:
+                stack.append(char)
+        return not stack
+
+#--------------c#
+
+public class Solution {
+    public bool IsValid(string s) {
+        Stack<Char> stack = new Stack<Char>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.WriteLine(s[i]);
+                if (s.Length == 0) return false;
+                if (s[i] == '(')
+                {
+                    stack.Push(')');
+                }
+                else if (s[i] == '{')
+                {
+                    stack.Push('}');
+                }
+                else if (s[i] == '[')
+                {
+                    stack.Push(']');
+                }
+                else if (stack.Count == 0)
+                    return false;
+                else if (s[i] == stack.Peek())
+                {
+                    stack.Pop();Console.WriteLine("pop");
+                }
+                else
+                    return false;
+            }
+            if (stack.Count == 0)
+                return true;
+            return false;
+    }
+}
+
+
+
+
+
+#--------------c++
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> stk;
+        for(int i=0; i<s.size(); i++) {
+            if(isLeft(s[i])) {
+                stk.push(s[i]);
+            }
+            else {
+                if(stk.empty() || !isClose(stk.top(),s[i])) 
+                    return false;
+                stk.pop();
+            }
+        }
+        return stk.empty();
+    }
+    
+    bool isLeft(char a) {
+        return (a=='(' || a=='{' || a=='[');
+    }
+    
+    bool isClose(char a, char b) {
+        if(a=='(') return b==')';
+        if(a=='[') return b==']';
+        if(a=='{') return b=='}';
+        return false;
+    }
+};
